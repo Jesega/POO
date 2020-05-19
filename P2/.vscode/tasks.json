@@ -1,0 +1,32 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "clang++ build active file",
+            "command": "/usr/bin/clang++",
+            "args": [
+                "-std=c++17",
+                "-g" ,
+                "-pedantic",
+                "-Wall",
+                "-lcrypt",
+                "-I~/POO/Serrano_Gallan_Jesus/P1",
+                "-I~/POO/Serrano_Gallan_Jesus/P2",
+                "-DP2",
+                "-o",
+                "prueba", 
+                "~/POO/Serrano_Gallan_Jesus/P2/prueba.cpp", 
+                "~/POO/Serrano_Gallan_Jesus/P1/cadena.cpp", 
+                "~/POO/Serrano_Gallan_Jesus/P1/fecha.cpp",
+                "~/POO/Serrano_Gallan_Jesus/P2/articulo.cpp",
+                "~/POO/Serrano_Gallan_Jesus/P2/usuario.cpp",
+                "~/POO/Serrano_Gallan_Jesus/P2/tarjeta.cpp",
+                "~/POO/Serrano_Gallan_Jesus/luhn.cpp"
+            ],
+            "options": {
+                "cwd": "/usr/bin"
+            }
+        }
+    ],
+    "version": "2.0.0"
+}

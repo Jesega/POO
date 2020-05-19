@@ -1,0 +1,3 @@
+clang++ -std=c++17 -g -pedantic -Wall -lcrypt -I../P1 -I. -DP2  -o prueba prueba.cpp ../P1/cadena.cpp ../P1/fecha.cpp articulo.cpp usuario.cpp tarjeta.cpp ../luhn.cpp
+
+make MAIN_SRCS=prueba.cpp prueba

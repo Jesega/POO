@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "/usr/include/clang/5.0/include",
+                "/usr/include/clang/5.0.1/include",
+                "~/POO/Serrano_Gallan_Jesus/P1",
+                "~/POO/Serrano_Gallan_Jesus/P2",
+                "~/POO/Serrano_Gallan_Jesus/dsl-comprobaciones"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}
