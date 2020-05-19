@@ -14,7 +14,6 @@ class Articulo
         const Fecha f_publi_;
         double precio_;
         unsigned int stock_;
-        //Esto es para probar git
     public:
         explicit Articulo(const Cadena& ref, const Cadena& tit, const Fecha& f, double price, unsigned int s=0);
         const Cadena referencia() const {return(referencia_);}
