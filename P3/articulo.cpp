@@ -2,8 +2,15 @@
 
 using namespace std;
 
-Articulo::Articulo(const Cadena& ref, const Cadena& tit, const Fecha& f, double price, unsigned int s):
-referencia_(ref), titulo_(tit), f_publi_(f), precio_(price), stock_(s) {}
+Articulo::Articulo(const Autor::Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price):
+autores_{as}, referencia_(ref), titulo_(tit), f_publi_(f), precio_(price)
+{
+    if (as.empty())
+    {
+        Articulo::Autores_vacios fallo{};
+        throw fallo;
+    }
+}
 
 std::ostream& operator <<(std::ostream& os, const Articulo& art)
 {
