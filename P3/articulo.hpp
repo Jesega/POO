@@ -8,6 +8,8 @@
 #include "cadena.hpp"
 #include "fecha.hpp"
 
+using namespace std;
+
 class Autor
 {
     private:
@@ -34,11 +36,14 @@ class Articulo //Clase abstracta (nivel 0)
         explicit Articulo(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price);
 
         //Observadoras
-        virtual const Cadena referencia() const = 0;
-        virtual const Cadena titulo() const = 0;
-        virtual const Fecha f_publi() const = 0;
-        virtual double& precio() = 0;               //Modificadora
-        virtual const double& precio() const = 0;   //Consultora
+        const Cadena referencia() const {return referencia_;}
+        const Cadena titulo() const {return titulo_;}
+        const Fecha f_publi() const {return f_publi_;}
+        const double& precio() const {return precio_;} 
+        const Autores& autores() const {return autores_;}
+
+        //Modificadora
+        virtual double& precio() = 0;               
 
         //Excepción
         class Autores_vacios
@@ -47,7 +52,7 @@ class Articulo //Clase abstracta (nivel 0)
         };
 
         //TODO: Los mostrar
-
+        virtual void impresion_especifica(ostream& os) const = 0;
 
     private:
         const Cadena referencia_;
@@ -57,7 +62,7 @@ class Articulo //Clase abstracta (nivel 0)
         const Autores& autores_;
 };
 
-std::ostream& operator <<(std::ostream& os, const Articulo& art); //Escritura
+ostream& operator <<(ostream& os, const Articulo& art); //Escritura
 
 class ArticuloAlmacenable: public Articulo //Clase abstracta (nivel 1)
 {
@@ -65,9 +70,10 @@ class ArticuloAlmacenable: public Articulo //Clase abstracta (nivel 1)
         //Constructor
         ArticuloAlmacenable(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price,int s=0): Articulo(as, ref, tit, f, price), stock_{s}{}
 
-        //Observador de stock
-        int stock() const {return stock_;}
-        //Modificador de stock
+        //Observadores
+        int stock() const {return stock_;}  
+
+        //Modificadores 
         int& stock() {return stock_;}
 
     private:
@@ -80,8 +86,11 @@ class Libro: public ArticuloAlmacenable //Clase tangible (nivel 2)
         //Constructor 
         Libro(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price,int n_pag, int s=0): ArticuloAlmacenable(as, ref, tit, f, price, s), n_pag_{n_pag}{}
     
-        //Observador de n_pag
+        //Observadores
         int n_pag() const {return n_pag_;}
+
+        //Impresión específica
+        void impresion_especifica(ostream& os) const;
 
     private:
         const int n_pag_;
@@ -96,6 +105,9 @@ class Cederron: public ArticuloAlmacenable //Clase tangible (nivel 2)
         //Observador de n_pag
         int tam() const {return tam_;}
 
+        //Impresión específica
+        void impresion_especifica(ostream& os) const;
+
     private:
         const int tam_;
 };
@@ -107,6 +119,10 @@ class LibroDigital: public Articulo //Clase tangible (nivel 1)
 
         //Observador f_expir_
         const Fecha& f_expir() const {return f_expir_;}
+
+        //Impresión específica
+        void impresion_especifica(ostream& os) const;
+
     private:
         const Fecha f_expir_;
 };
