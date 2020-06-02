@@ -1,11 +1,13 @@
 # $Id: Make_check.mk 416 2018-04-23 08:38:49Z u44965478 $
-# © 2014-2020 Pedro Delgado y los profesores de POO
-# LIBRERÍA - P3
+# Comprobaciones de código para P4
+# ©2015 Pedro Delgado, para POO
+# 2017 - Simplificación - Gerardo
+# 2020 - usuario-pedido.cpp (no hpp) - Gerardo
 
 # Directorio donde está el código compartido del DSL
 DIR=../dsl-comprobaciones/
 
-# Obligatorio Clang, versión 3.9 hasta 5 (no 7).
+# Obligatorio Clang, versión 3.9 al menos.
 CXX         := clang++
 CPPFLAGS    := -I${DIR} $(shell llvm-config --cppflags)
 CXXFLAGS    := -std=c++14
@@ -16,11 +18,11 @@ CXXFLAGS    := -std=c++14
 LDFLAGS     := # -static
 LLVMLDFLAGS := $(shell llvm-config --libs) $(LDFLAGS)
 COMMONSRCS  := $(DIR)caclibrary.cpp $(DIR)execute.cpp $(DIR)matchers.cpp
-SOURCES     := pedido_check.cpp ${COMMONSRCS}
+SOURCES     := catalogo_check.cpp ${COMMONSRCS}
 COMMONHDRS  := $(COMMONSRCS:.cpp=.h) $(DIR)info.h
 COMMONOBJS  := $(COMMONSRCS:.cpp=.o)
 OBJECTS     := $(SOURCES:.cpp=.o)
-EXES        := pedido_check
+EXES        := catalogo_check
 CLANGLIBS   := -lclangFrontend -lclangSerialization -lclangDriver \
 		-lclangTooling -lclangParse -lclangSema -lclangAnalysis \
 		-lclangEdit -lclangAST -lclangASTMatchers -lclangLex \
@@ -30,20 +32,17 @@ CLANGLIBS   := -lclangFrontend -lclangSerialization -lclangDriver \
 all: $(EXES)
 
 ${EXES}: $(OBJECTS)
-	@echo "(LINK) pedido_check.o"
-	@$(CXX) -o $@ $^ $(CLANGLIBS) $(LLVMLDFLAGS)
+	@echo "(LINK) catalogo_check.o"
+	$(CXX) -o $@ $^ $(CLANGLIBS) $(LLVMLDFLAGS)
 
-pedido_check.o: $(COMMONHDRS)
+catalogo_check.o: $(COMMONHDRS)
 
-check_pedido: ${EXES}
+check check_catalogo: ${EXES}
 	@echo Verificando los fuentes ...
-	@./${EXES} -extra-arg-before="-I../P1" -extra-arg="-std=c++14" \
+	./${EXES} -extra-arg-before="-I../P1" -extra-arg="-std=c++14" \
 		articulo.cpp usuario.cpp tarjeta.cpp pedido.cpp \
 		pedido-articulo.cpp usuario-pedido.cpp -- 2> /dev/null
 
-check: check_pedido
-
 clean:
 	@echo "Limpiando."
-	@${RM} $(EXES) $(OBJECTS)
-
+	@${RM} ${RMFLAGS} $(EXES) $(OBJECTS)
