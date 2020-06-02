@@ -142,7 +142,8 @@ std::ostream& mostrar_carro(std::ostream& os, const Usuario& u) //Escritura del 
     Usuario::Articulos::const_iterator i=u.compra().cbegin();
     while(i!=u.compra().cend())
     {
-        os << i->second<< '\t' << i->first[0]<< endl;
+        os << i->second<< '\t' << '[' << i->first[0].referencia() << "] \""
+        << i->first[0].titulo() << "\", "<< i->first[0].f_publi()<<". "<<i->first[0].precio()<<" €"<< endl;
         i++;
     }  
     return(os);
