@@ -1,5 +1,6 @@
 #include "pedido.hpp"
 
+//-----------------------------------------------------Pedido-------------------------------------------------------------------------------
 int Pedido::n_total_pedidos_{0};
 
 //Constructor
@@ -38,14 +39,17 @@ numero_{Pedido::n_total_pedidos_ + 1},  tarjeta_{&T}, fecha_{f}, total_{0.0}
 
     //Comprobamos el carro artículo por artículo
     bool PedidoVacio{true};
+    Usuario::Articulos Carrito{U.compra()};
     for (Usuario::Articulos::const_iterator i = U.compra().cbegin(); i != U.compra().cend(); i++)
     {
         //El artículo es un libro digital (no tiene stock)
         if(LibroDigital * ld = dynamic_cast<LibroDigital*>(i->first))   
         {
-            //Si expira más tarde que hoy, es correcto
-            ld->f_expir() > Fecha(); 
-            PedidoVacio=false; 
+            //Si expira más tarde que hoy, es correcto, por tanto el carrito no está vacío
+            if(ld->f_expir() > Fecha()) 
+                PedidoVacio=false; 
+            else    //Si no, borramos el libro vacío del carrito
+                Carrito.erase(i->first);
         }
         else
         {
@@ -70,11 +74,18 @@ numero_{Pedido::n_total_pedidos_ + 1},  tarjeta_{&T}, fecha_{f}, total_{0.0}
             }
         }
     }
+    
+    //Si el pedido solo contenía Libros Digitales expirados, lanzamos una excepción
+    if(PedidoVacio)
+    {
+        Pedido::Vacio fallo{U};
+        throw fallo;
+    }
     //FIN COMPROBACIONES
 
     //Calculamos el importe
     double importe_total{0};
-    for (Usuario::Articulos::const_iterator i = U.compra().cbegin(); i != U.compra().cend(); i++)
+    for (Usuario::Articulos::const_iterator i = Carrito.cbegin(); i != Carrito.cend(); i++)
     {
         //Actualizamos el importe del pedido
         importe_total += (i->second) * (i->first->precio());
