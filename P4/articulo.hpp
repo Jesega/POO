@@ -79,7 +79,7 @@ class ArticuloAlmacenable: public Articulo //Clase abstracta (nivel 1)
         //Modificadores 
         int& stock() {return stock_;}
 
-    private:
+    protected:
         int stock_;
 };
 

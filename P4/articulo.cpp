@@ -54,7 +54,7 @@ ArticuloAlmacenable(as, ref, tit, f, price, s), n_pag_{n_pag}{}
 
 void Libro::impresion_especifica(ostream& os) const
 {
-    os << n_pag() << " págs., "<< stock()<<  " unidades.";
+    os << n_pag_ << " págs., "<< stock_<<  " unidades.";
 }
 
 //-----------------------------------------------------Cederron-------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ ArticuloAlmacenable(as, ref, tit, f, price, s), tam_{tam}{}
 
 void Cederron::impresion_especifica(ostream& os) const
 {
-    os <<  tam() << " MB, "<< stock()<< " unidades.";
+    os <<  tam_ << " MB, "<< stock_<< " unidades.";
 }
 
 //-----------------------------------------------------LibroDigital-------------------------------------------------------------------------------
