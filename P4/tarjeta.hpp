@@ -69,10 +69,7 @@ class Tarjeta
 
         //Constructor
         Tarjeta(const Numero& num, Usuario& user, const Fecha& caducidad);
-            /*  TODO:  
-                El constructor deberá asociar la tarjeta que se está creando con su Usuario correspondiente,
-                llamando a Usuario::es_titular_de sobre su titular.
-            */
+            
         //Clase para las excepciones de tarjeta caducada
         class Caducada
         {
@@ -106,13 +103,13 @@ class Tarjeta
         bool activa() const noexcept{return(activa_);}
         Tipo tipo() const noexcept;
 
-        //Activar o deszactivar tarjeta
+        //Activar o desactivar tarjeta
         bool activa(bool a=true);
 
         //Clase de excepción Desactivada
         class Desactivada
         {
-            //Vacía, para uso posterior en otros casos de uso.
+
         };
 
         //Destructor
@@ -121,7 +118,7 @@ class Tarjeta
 
 bool operator<(const Tarjeta& a, const Tarjeta& b) noexcept;
 
-std::ostream& operator <<(std::ostream& os, const Tarjeta& t); //Escritura de tarjeta
-std::ostream& operator <<(std::ostream& os, const Tarjeta::Tipo& t); //Escritura de tipo
+std::ostream& operator <<(std::ostream& os, const Tarjeta& t); //Inserción es flujo de salida de tarjeta
+std::ostream& operator <<(std::ostream& os, const Tarjeta::Tipo& t); //Inserción es flujo de salida de tipo
 
 #endif

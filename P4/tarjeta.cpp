@@ -8,7 +8,7 @@ bool Numero::EsBlanco::operator()(char c) const {return(isspace(c));}
 
 bool Numero::EsDigito::operator()(char c) const {return(isdigit(c));}
 
-//---------------------------------------------------------------------NUMERO--------------------------------------------------------------
+//---------------------------------------------------------------------Numero--------------------------------------------------------------
 Numero::Numero(const Cadena& num): num_{num}
 {
     Cadena aux{num};
@@ -20,7 +20,7 @@ Numero::Numero(const Cadena& num): num_{num}
         aux = Cadena(aux.c_str());  //Actualizamos el tamaño de la cadena
     }
 
-    //unary_negate<Numero::EsDigito> not_EsDigito((EsDigito())); //Otra forma de hacerlo
+    //Comprobaciones
     not_fn<Numero::EsDigito>(EsDigito());
     Cadena::const_iterator i = find_if(aux.begin(), aux.end(), not_fn<Numero::EsDigito>(EsDigito()));
     if(i!=aux.cend())
@@ -40,6 +40,7 @@ Numero::Numero(const Cadena& num): num_{num}
         Numero::Incorrecto fail(NO_VALIDO);
         throw fail;
     }
+    //Fin comprobaciones
 
     if(aux != num)
         num_=aux;
@@ -50,7 +51,7 @@ bool operator<(const Numero& a, const Numero& b) noexcept
     return(strcmp(a, b) < 0);
 }
 
-//-------------------------------------------------------------TARJETA-------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------Tarjeta-------------------------------------------------------------------------------------------------------
 //Global de números
 set<Numero> Tarjeta::conjunto; //Como es static tiene que inicializarse en el cpp
 
@@ -58,14 +59,13 @@ set<Numero> Tarjeta::conjunto; //Como es static tiene que inicializarse en el cp
 Tarjeta::Tarjeta(const Numero& num, Usuario& user, const Fecha& caducidad): numero_{num}, titular_{&user}, caducidad_{caducidad}, activa_{true}
 {
     //Si esta fecha es anterior a la actual, el constructor lanzará la excepción Tarjeta::Caducada.
-    Fecha hoy;
-    if(caducidad_< hoy)
+    if(caducidad_< Fecha())
     {
         Tarjeta::Caducada caducada(caducidad_);
         throw caducada;
     }
     
-    //Si el numero insertado ya estaba incluido, sale excepción
+    //Si el numero insertado ya estaba incluido, salta excepción
     if(!conjunto.insert(num).second)
     {
         Tarjeta::Num_duplicado dup(num);
@@ -118,7 +118,7 @@ void Tarjeta::anula_titular()
     activa_=false;
 }
 
-//Desatructor TODO
+//Desatructor
 Tarjeta::~Tarjeta()
 {
     if(titular_!=nullptr)
@@ -162,7 +162,7 @@ std::ostream& operator <<(std::ostream& os, const Tarjeta& t)
     os<<endl;
     return(os);
 }
-
+//Para mostrar el tipo
 std::ostream& operator <<(std::ostream& os, const Tarjeta::Tipo& t) //Escritura de tipo
 {
     switch (t)
