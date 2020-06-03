@@ -20,7 +20,7 @@ class Autor
         //Constructor
         Autor(const Cadena& nombre, const Cadena& apellidos, const Cadena& direccion);
 
-        //Observador
+        //Observadoras
         const Cadena& nombre() const noexcept{return(nombre_);}
         const Cadena& apellidos() const noexcept{return(apellidos_);}
         const Cadena& direccion() const noexcept{return(direccion_);}
@@ -43,7 +43,7 @@ class Articulo //Clase abstracta (nivel 0)
         const Autores& autores() const {return autores_;}
 
         //Modificadora
-        virtual double& precio() {return precio_;}           
+        double& precio() {return precio_;}           
 
         //Excepción
         class Autores_vacios
