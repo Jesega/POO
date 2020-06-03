@@ -1,16 +1,20 @@
 #include "pedido-articulo.hpp"
 using namespace std;
 
+
+//-----------------------------------------------------OrdenaArticulos-------------------------------------------------------------------------------
 bool OrdenaArticulos::operator()(Articulo* A1, Articulo* A2) const
 {
     return(A1->referencia() < A2->referencia());
 }
 
+//-----------------------------------------------------OrdenaPediods-------------------------------------------------------------------------------
 bool OrdenaPedidos::operator()(Pedido* P1, Pedido* P2) const
 {
     return(P1->numero() < P2->numero());
 }
 
+//-----------------------------------------------------LineaPedido-------------------------------------------------------------------------------
 //Inserción en flujo
 std::ostream& operator <<(std::ostream& os, const LineaPedido& l)
 {
@@ -18,6 +22,7 @@ std::ostream& operator <<(std::ostream& os, const LineaPedido& l)
     return(os);
 }
 
+//-----------------------------------------------------Pedido_Articulo-------------------------------------------------------------------------------
 //Asociación
 void Pedido_Articulo::pedir(Pedido& P, Articulo& A, double precio, unsigned int c)
 {

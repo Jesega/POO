@@ -63,9 +63,8 @@ class Pedido_Articulo //Clase para implementar la asociación
         std::map<Articulo*, Pedidos, OrdenaArticulos> Arts_to_Peds; //Mapa de Articulo a Pedidos (1 a N)
 };
 
-std::ostream& operator <<(std::ostream& os, const Pedido_Articulo::ItemsPedido& I); //Inserción en flujo de salida
-std::ostream& operator <<(std::ostream& os, const Pedido_Articulo::Pedidos& P); //Inserción en flujo de salida
+std::ostream& operator <<(std::ostream& os, const Pedido_Articulo::ItemsPedido& I); //Inserción en flujo de salida de ItemsPedido
+std::ostream& operator <<(std::ostream& os, const Pedido_Articulo::Pedidos& P); //Inserción en flujo de salida de Pedidos
 
-//<<detalle()
 
 #endif
