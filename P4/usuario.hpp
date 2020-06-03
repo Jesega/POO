@@ -102,7 +102,7 @@ class Usuario
         static unordered_set<Cadena> conjunto_ids;
 };
 
-std::ostream& mostrar_carro(std::ostream& os, const Usuario& u); //Escritura del carro
+std::ostream& mostrar_carro(std::ostream& os, const Usuario& u); //Escribir en os el carro del usuario
 
 
 
