@@ -79,7 +79,7 @@ std::ostream& operator <<(std::ostream& os, const Pedido_Articulo::Pedidos& P)
         os << endl;
     }
     os << "===========================================================================================" << endl;
-    os << "Total: "<< fixed<<setprecision(2)<<importetotal <<" €\t"<< cantidadtotal<<endl;
+    os << fixed<<setprecision(2)<<importetotal <<" €\t"<< cantidadtotal<<endl;
     return(os);
 }
 

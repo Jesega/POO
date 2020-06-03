@@ -137,15 +137,21 @@ std::ostream& operator <<(std::ostream& os, const Usuario& u) //Escritura de Usu
 std::ostream& mostrar_carro(std::ostream& os, const Usuario& u) //Escritura del carro
 {
     os<<"Carrito de la compra de "<< u.id() << " [Artículos: " << u.n_articulos() << ']'<<endl;
-    os << "Cant." << '\t' << "Artículo" << endl;
 
-    Usuario::Articulos::const_iterator i=u.compra().cbegin();
-    while(i!=u.compra().cend())
+    //Mostramos el carro solo si tiene algún artículo
+    if(u.n_articulos()!=0)
     {
-        os << i->second<< '\t' << '[' << i->first[0].referencia() << "] \""
-        << i->first[0].titulo() << "\", "<< i->first[0].f_publi()<<". "<<i->first[0].precio()<<" €"<< endl;
-        i++;
-    }  
+        os << "Cant." << '\t' << "Artículo" << endl;
+
+        Usuario::Articulos::const_iterator i=u.compra().cbegin();
+        while(i!=u.compra().cend())
+        {
+            os << i->second<< '\t' << '[' << i->first[0].referencia() << "] \""
+            << i->first[0].titulo() << "\", "<< i->first[0].f_publi().anno()<<". "
+            <<fixed << setprecision(2) <<i->first[0].precio()<<" €"<< endl;
+            i++;
+        }  
+    }
     return(os);
 }
 
