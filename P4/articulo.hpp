@@ -89,7 +89,7 @@ class Libro: public ArticuloAlmacenable //Clase tangible (nivel 2)
         //Constructor 
         Libro(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price,int n_pag, int s=0);
     
-        //Observadores
+        //Observador
         int n_pag() const {return n_pag_;}
 
         //Impresión específica
@@ -105,7 +105,7 @@ class Cederron: public ArticuloAlmacenable //Clase tangible (nivel 2)
         //Constructor 
         Cederron(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price,int tam, int s=0);
     
-        //Observador de n_pag
+        //Observador
         int tam() const {return tam_;}
 
         //Impresión específica
@@ -121,7 +121,7 @@ class LibroDigital: public Articulo //Clase tangible (nivel 1)
         //Constructor
         LibroDigital(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price, const Fecha& f_expir);
 
-        //Observador f_expir_
+        //Observador
         const Fecha& f_expir() const {return f_expir_;}
 
         //Impresión específica

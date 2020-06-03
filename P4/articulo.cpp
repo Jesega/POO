@@ -2,11 +2,11 @@
 
 using namespace std;
 
-//Clase Autor 
+//-----------------------------------------------------Auor-------------------------------------------------------------------------------
 Autor::Autor(const Cadena& nombre, const Cadena& apellidos, const Cadena& direccion): 
 nombre_{nombre}, apellidos_{apellidos}, direccion_{direccion}{}
 
-//Classe Artículo
+//-----------------------------------------------------Articulo-------------------------------------------------------------------------------
 Articulo::Articulo(const Articulo::Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price):
 autores_{as}, referencia_(ref), titulo_(tit), f_publi_(f), precio_(price)
 {
@@ -43,12 +43,12 @@ std::ostream& operator <<(std::ostream& os, const Articulo& art)
     return(os);
 }
 
-//Clase ArticuloAlmacenable
+//-----------------------------------------------------ArticuloAlmacenable-------------------------------------------------------------------------------
 ArticuloAlmacenable::ArticuloAlmacenable(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price,int s): 
 Articulo(as, ref, tit, f, price), stock_{s}{}
 
 
-//Clase Libro 
+//-----------------------------------------------------Libro-------------------------------------------------------------------------------
 Libro::Libro(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price,int n_pag, int s): 
 ArticuloAlmacenable(as, ref, tit, f, price, s), n_pag_{n_pag}{}
 
@@ -57,7 +57,7 @@ void Libro::impresion_especifica(ostream& os) const
     os << n_pag() << " págs., "<< stock()<<  " unidades.";
 }
 
-//Clase Cederron
+//-----------------------------------------------------Cederron-------------------------------------------------------------------------------
 Cederron::Cederron(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price,int tam, int s): 
 ArticuloAlmacenable(as, ref, tit, f, price, s), tam_{tam}{}
 
@@ -66,7 +66,7 @@ void Cederron::impresion_especifica(ostream& os) const
     os <<  tam() << " MB, "<< stock()<< " unidades.";
 }
 
-//Clase LibroDigital
+//-----------------------------------------------------LibroDigital-------------------------------------------------------------------------------
 LibroDigital::LibroDigital(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price, const Fecha& f_expir): 
 Articulo(as, ref, tit, f, price), f_expir_{f_expir}{}
 
