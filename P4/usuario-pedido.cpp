@@ -1,5 +1,7 @@
 #include "usuario-pedido.hpp"
 
+//------------------------------------------------------------------Usuario_Pedido--------------------------------------------------------
+
 //Métodos encargados de hacer las asociaciones
 void Usuario_Pedido::asocia(Usuario& u, Pedido& p)
 {
