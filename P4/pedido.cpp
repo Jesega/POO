@@ -110,7 +110,7 @@ numero_{Pedido::n_total_pedidos_ + 1},  tarjeta_{&T}, fecha_{f}, total_{0.0}
     n_total_pedidos_++;
 }
 
-std::ostream& operator <<(std::ostream& os, const Pedido& P) //Inserción en flujo de salida
+std::ostream& operator <<(std::ostream& os, const Pedido& P) noexcept//Inserción en flujo de salida
 {
     os << "Núm. pedido:\t" << P.numero() << endl;
     os << "Fecha:\t\t" << P.fecha() << endl;
