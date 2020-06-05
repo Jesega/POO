@@ -46,7 +46,7 @@ Numero::Numero(const Cadena& num): num_{num}
         num_=aux;
 }
 
-bool operator<(const Numero& a, const Numero& b) noexcept
+bool operator<(const Numero& a, const Numero& b)
 {
     return(strcmp(a, b) < 0);
 }

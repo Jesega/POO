@@ -46,7 +46,7 @@ class Numero
         
 };
 
-bool operator<(const Numero& a, const Numero& b) noexcept;
+bool operator<(const Numero& a, const Numero& b);
 
 class Tarjeta 
 {
