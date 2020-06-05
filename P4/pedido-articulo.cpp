@@ -1,25 +1,24 @@
 #include "pedido-articulo.hpp"
 using namespace std;
 
+//-----------------------------------------------------LineaPedido-------------------------------------------------------------------------------
+//Inserción en flujo
+ostream& operator <<(ostream& os, const LineaPedido& l)   
+{
+    os<< fixed << setprecision(2) << l.precio_venta() << " €\t" << l.cantidad();
+    return(os);
+}
 
 //-----------------------------------------------------OrdenaArticulos-------------------------------------------------------------------------------
-bool OrdenaArticulos::operator()(Articulo* A1, Articulo* A2) const
+bool OrdenaArticulos::operator()(Articulo* A1, Articulo* A2) const noexcept
 {
     return(A1->referencia() < A2->referencia());
 }
 
 //-----------------------------------------------------OrdenaPediods-------------------------------------------------------------------------------
-bool OrdenaPedidos::operator()(Pedido* P1, Pedido* P2) const
+bool OrdenaPedidos::operator()(Pedido* P1, Pedido* P2) const noexcept
 {
     return(P1->numero() < P2->numero());
-}
-
-//-----------------------------------------------------LineaPedido-------------------------------------------------------------------------------
-//Inserción en flujo
-std::ostream& operator <<(std::ostream& os, const LineaPedido& l)
-{
-    os<< std::fixed << std::setprecision(2) << l.precio_venta() << " €\t" << l.cantidad();
-    return(os);
 }
 
 //-----------------------------------------------------Pedido_Articulo-------------------------------------------------------------------------------
@@ -43,14 +42,14 @@ const Pedido_Articulo::ItemsPedido& Pedido_Articulo::detalle(Pedido& p)
 
 Pedido_Articulo::Pedidos Pedido_Articulo::ventas(Articulo& a)
 {
-    std::map<Articulo*, Pedidos, OrdenaArticulos>::const_iterator it = Arts_to_Peds.find(&a);
+    map<Articulo*, Pedidos, OrdenaArticulos>::const_iterator it = Arts_to_Peds.find(&a);
     if(it != Arts_to_Peds.cend())
         return(Arts_to_Peds.find(&a)->second);
     else
         return(Pedidos());
 }
 
-std::ostream& operator <<(std::ostream& os, const Pedido_Articulo::ItemsPedido& I)
+ostream& operator <<(std::ostream& os, const Pedido_Articulo::ItemsPedido& I)
 {
     os<< "PVP\tCantidad\tArtículo"<<endl;
     os << "============================================"<<endl;
@@ -91,7 +90,7 @@ std::ostream& operator <<(std::ostream& os, const Pedido_Articulo::Pedidos& P)
 void Pedido_Articulo::mostrarDetallePedidos(ostream& os)
 {
     double importetotal{0};
-    for(std::map<Pedido *, ItemsPedido, OrdenaPedidos>::const_iterator it = Ped_to_Arts.cbegin();it!= Ped_to_Arts.cend(); it++)
+    for(map<Pedido *, ItemsPedido, OrdenaPedidos>::const_iterator it = Ped_to_Arts.cbegin();it!= Ped_to_Arts.cend(); it++)
     {
         os << "Pedido núm. "<< it->first->numero() << endl;
         os << "Cliente: "<< *(it->first->tarjeta()->titular()) <<"Fecha: "<< it->first->fecha()<< endl;

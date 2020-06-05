@@ -17,7 +17,7 @@ autores_{as}, referencia_(ref), titulo_(tit), f_publi_(f), precio_(price)
     }
 }
 
-std::ostream& operator <<(std::ostream& os, const Articulo& art) noexcept
+ostream& operator <<(ostream& os, const Articulo& art) noexcept
 {
     //Imprimimos la referencia y el título
     os << '[' << art.referencia() <<"] "<< '\"' << art.titulo() << '\"' << ", de ";
