@@ -31,7 +31,7 @@ class Clave
             private:
                 Razon razon_;
             public:
-                Incorrecta(Razon r): razon_{r} {} //Constructor
+                Incorrecta(Razon r) noexcept: razon_{r} {} //Constructor
                 Razon razon() const noexcept{return(razon_);}
         };
 
@@ -58,8 +58,8 @@ class Usuario
             private:
                 const Cadena idd_;
             public:
-                Id_duplicado(const Cadena& id):idd_{id}{};
-                const Cadena idd() const{return(idd_);}
+                Id_duplicado(const Cadena& id)noexcept:idd_{id}{};
+                const Cadena idd() const noexcept{return(idd_);}
         };
 
         //Constructor de copia anulado
