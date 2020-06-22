@@ -18,7 +18,7 @@ class Autor
         Cadena direccion_;
     public:
         //Constructor
-        Autor(const Cadena& nombre, const Cadena& apellidos, const Cadena& direccion);
+        Autor(const Cadena& nombre, const Cadena& apellidos, const Cadena& direccion) noexcept;
 
         //Observadoras
         const Cadena& nombre() const noexcept{return(nombre_);}
@@ -36,14 +36,14 @@ class Articulo //Clase abstracta (nivel 0)
         explicit Articulo(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price);
 
         //Observadoras
-        const Cadena referencia() const {return referencia_;}
-        const Cadena titulo() const {return titulo_;}
-        const Fecha f_publi() const {return f_publi_;}
-        const double& precio() const {return precio_;} 
-        const Autores& autores() const {return autores_;}
+        const Cadena referencia() const noexcept{return referencia_;}
+        const Cadena titulo() const noexcept{return titulo_;}
+        const Fecha f_publi() const noexcept{return f_publi_;}
+        const double& precio() const noexcept{return precio_;} 
+        const Autores& autores() const noexcept{return autores_;}
 
         //Modificadora
-        double& precio() {return precio_;}           
+        double& precio() noexcept{return precio_;}           
 
         //Excepción
         class Autores_vacios
@@ -65,7 +65,7 @@ class Articulo //Clase abstracta (nivel 0)
         double precio_;
 };
 
-ostream& operator <<(ostream& os, const Articulo& art); //Escritura
+ostream& operator <<(ostream& os, const Articulo& art) noexcept; //Escritura
 
 class ArticuloAlmacenable: public Articulo //Clase abstracta (nivel 1)
 {
@@ -74,10 +74,10 @@ class ArticuloAlmacenable: public Articulo //Clase abstracta (nivel 1)
         ArticuloAlmacenable(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price,int s=0);
 
         //Observadores
-        int stock() const {return stock_;}  
+        int stock() const noexcept{return stock_;}  
 
         //Modificadores 
-        int& stock() {return stock_;}
+        int& stock() noexcept{return stock_;}
 
     protected:
         int stock_;
@@ -90,10 +90,10 @@ class Libro: public ArticuloAlmacenable //Clase tangible (nivel 2)
         Libro(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price,int n_pag, int s=0);
     
         //Observador
-        int n_pag() const {return n_pag_;}
+        int n_pag() const noexcept{return n_pag_;}
 
         //Impresión específica
-        void impresion_especifica(ostream& os) const;
+        void impresion_especifica(ostream& os) const noexcept;
 
     private:
         const int n_pag_;
@@ -106,10 +106,10 @@ class Cederron: public ArticuloAlmacenable //Clase tangible (nivel 2)
         Cederron(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price,int tam, int s=0);
     
         //Observador
-        int tam() const {return tam_;}
+        int tam() const noexcept{return tam_;}
 
         //Impresión específica
-        void impresion_especifica(ostream& os) const;
+        void impresion_especifica(ostream& os) const noexcept;
 
     private:
         const int tam_;
@@ -122,10 +122,10 @@ class LibroDigital: public Articulo //Clase tangible (nivel 1)
         LibroDigital(const Autores& as, const Cadena& ref, const Cadena& tit, const Fecha& f, double price, const Fecha& f_expir);
 
         //Observador
-        const Fecha& f_expir() const {return f_expir_;}
+        const Fecha& f_expir() const noexcept{return f_expir_;}
 
         //Impresión específica
-        void impresion_especifica(ostream& os) const;
+        void impresion_especifica(ostream& os) const noexcept;
 
     private:
         const Fecha f_expir_;

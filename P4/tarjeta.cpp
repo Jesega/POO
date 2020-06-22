@@ -46,7 +46,7 @@ Numero::Numero(const Cadena& num): num_{num}
         num_=aux;
 }
 
-bool operator<(const Numero& a, const Numero& b) noexcept
+bool operator<(const Numero& a, const Numero& b)
 {
     return(strcmp(a, b) < 0);
 }
@@ -105,14 +105,14 @@ Tarjeta::Tipo Tarjeta::tipo() const noexcept
 }
 
 //Activar o desactivar
-bool Tarjeta::activa(bool a)
+bool Tarjeta::activa(bool a) noexcept
 {
     activa_=a;
     return(a);
 }
 
 //Para cuando se destruya el titular 
-void Tarjeta::anula_titular()
+void Tarjeta::anula_titular() noexcept
 {
     titular_=nullptr;
     activa_=false;
@@ -127,7 +127,7 @@ Tarjeta::~Tarjeta()
 }
 
 //Comparación de tarjetas
-bool operator<(const Tarjeta& a, const Tarjeta& b) noexcept 
+bool operator<(const Tarjeta& a, const Tarjeta& b) 
 {return(strcmp(a.numero(),b.numero()) < 0);}
 
 //Para mostrar la tarjeta
@@ -163,7 +163,7 @@ std::ostream& operator <<(std::ostream& os, const Tarjeta& t)
     return(os);
 }
 //Para mostrar el tipo
-std::ostream& operator <<(std::ostream& os, const Tarjeta::Tipo& t) //Escritura de tipo
+std::ostream& operator <<(std::ostream& os, const Tarjeta::Tipo& t) noexcept//Escritura de tipo
 {
     switch (t)
     {

@@ -15,34 +15,34 @@ class LineaPedido   //Clase que nace de la asociación
 {
     public:
         //Constructor 
-        explicit LineaPedido(double p, unsigned int c=1): precio_venta_{p}, cantidad_{c}{}; 
+        explicit LineaPedido(double p, unsigned int c=1) noexcept: precio_venta_{p}, cantidad_{c}{}; 
 
         //Observadores
-        double precio_venta() const {return(precio_venta_);}
-        unsigned int cantidad() const {return(cantidad_);}
+        double precio_venta() const noexcept{return(precio_venta_);}
+        unsigned int cantidad() const noexcept{return(cantidad_);}
 
     private:
         double precio_venta_;
         unsigned int cantidad_;
 };
 
-std::ostream& operator <<(std::ostream& os, const LineaPedido& l); //Inserción en flujo
+ostream& operator <<(ostream& os, const LineaPedido& l); //Inserción en flujo
 
 struct OrdenaArticulos
 {
-    bool operator()(Articulo* A1, Articulo* A2) const;
+    bool operator()(Articulo* A1, Articulo* A2) const noexcept;
 };
 
 struct OrdenaPedidos
 {
-    bool operator()(Pedido* P1, Pedido* P2) const;
+    bool operator()(Pedido* P1, Pedido* P2) const noexcept;
 };
 
 class Pedido_Articulo //Clase para implementar la asociación
 {
     public:
-        typedef std::map<Articulo *, LineaPedido, OrdenaArticulos> ItemsPedido;
-        typedef std::map<Pedido*, LineaPedido, OrdenaPedidos> Pedidos;
+        typedef map<Articulo *, LineaPedido, OrdenaArticulos> ItemsPedido;
+        typedef map<Pedido*, LineaPedido, OrdenaPedidos> Pedidos;
 
         //Asociación
         void pedir(Pedido& P, Articulo& A, double precio, unsigned int c=1);

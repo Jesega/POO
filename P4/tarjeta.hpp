@@ -46,7 +46,7 @@ class Numero
         
 };
 
-bool operator<(const Numero& a, const Numero& b) noexcept;
+bool operator<(const Numero& a, const Numero& b);
 
 class Tarjeta 
 {
@@ -58,10 +58,11 @@ class Tarjeta
         static set<Numero> conjunto;
 
         //Para cuando se destruya el titular, solo tienen acceso los Usuario
-        void anula_titular();
+        void anula_titular() noexcept;
 
     public:
 
+        //Declaración de amistad
         friend class Usuario; 
 
         //Enumeración pública de tipos de Tarjeta
@@ -76,8 +77,8 @@ class Tarjeta
             private:
                 Fecha caducada_;
             public:
-                Caducada(const Fecha& f): caducada_{f}{}
-                const Fecha cuando() const{return(caducada_);}
+                Caducada(const Fecha& f) noexcept: caducada_{f}{}
+                const Fecha cuando() const noexcept{return(caducada_);}
         };
         
         //Clase para las excepciones de numero de tarjeta repetido
@@ -86,8 +87,8 @@ class Tarjeta
             private:
                 Numero duplicado_;
             public:
-                Num_duplicado(const Numero& dup): duplicado_{dup}{}
-                const Numero que() const{return(duplicado_);}
+                Num_duplicado(const Numero& dup) noexcept: duplicado_{dup}{}
+                const Numero que() const noexcept{return(duplicado_);}
         };
 
         //Constructor de copia anulado
@@ -104,7 +105,7 @@ class Tarjeta
         Tipo tipo() const noexcept;
 
         //Activar o desactivar tarjeta
-        bool activa(bool a=true);
+        bool activa(bool a=true) noexcept;
 
         //Clase de excepción Desactivada
         class Desactivada
@@ -116,9 +117,9 @@ class Tarjeta
         ~Tarjeta();
 };
 
-bool operator<(const Tarjeta& a, const Tarjeta& b) noexcept;
+bool operator<(const Tarjeta& a, const Tarjeta& b);
 
 std::ostream& operator <<(std::ostream& os, const Tarjeta& t); //Inserción es flujo de salida de tarjeta
-std::ostream& operator <<(std::ostream& os, const Tarjeta::Tipo& t); //Inserción es flujo de salida de tipo
+std::ostream& operator <<(std::ostream& os, const Tarjeta::Tipo& t) noexcept; //Inserción es flujo de salida de tipo
 
 #endif
